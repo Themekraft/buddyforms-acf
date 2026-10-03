@@ -650,9 +650,9 @@ function buddyforms_acf_process_submission_end( $args ) {
 						if ( $field['type'] == 'acf-group' || 'acf-field' === $field['type'] ) {
 							if ( 'acf-field' === $field['type'] ) {
 								if ( post_type_exists( 'acf-field-group' ) ) {
-									$field_value = isset( $_POST['acf'][ $field['acf_field'] ] ) ? sanitize_text_input( wp_unslash( $_POST['acf'][ $field['acf_field'] ] ) ) : '';
+									$field_value = isset( $_POST['acf'][ $field['acf_field'] ] ) ? sanitize_text_field( wp_unslash( $_POST['acf'][ $field['acf_field'] ] ) ) : '';
 								} else {
-									$field_value = isset( $_POST['fields'][ $field['acf_field'] ] ) ? sanitize_text_input( wp_unslash( $_POST['fields'][ $field['acf_field'] ] ) ) : '';
+									$field_value = isset( $_POST['fields'][ $field['acf_field'] ] ) ? sanitize_text_field( wp_unslash( $_POST['fields'][ $field['acf_field'] ] ) ) : '';
 								}
 								if ( isset( $field_value ) ) {
 									xprofile_set_field_data( $field['mapped_xprofile_field'], $user_id, $field_value );
@@ -667,7 +667,7 @@ function buddyforms_acf_process_submission_end( $args ) {
 									if ( $fields ) {
 										foreach ( $fields as $acf_field ) {
 											if ( isset( $_POST['acf'][ $acf_field['key'] ] ) ) {
-												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_input( wp_unslash( $_POST['acf'][ $acf_field['key'] ] ) ) );
+												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_field( wp_unslash( $_POST['acf'][ $acf_field['key'] ] ) ) );
 											}
 										}
 									}
@@ -676,7 +676,7 @@ function buddyforms_acf_process_submission_end( $args ) {
 									if ( $fields ) {
 										foreach ( $fields as $acf_field ) {
 											if ( isset( $_POST[ $acf_field['name'] ] ) ) {
-												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_input( wp_unslash( $_POST[ $acf_field['name'] ] ) ) );
+												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_field( wp_unslash( $_POST[ $acf_field['name'] ] ) ) );
 											}
 										}
 									}
