@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: BuddyForms Advanced Custom Fields
  * Plugin URI: http://buddyforms.com/downloads/buddyforms-advanced-custom-fields/
  * Description: Integrates the populare ACF Plugin with BuddyForms. Use all ACF Fields in your form like native BuddyForms Form Elements
- * Version: 1.3.20
+ * Version: 1.3.21-beta.1
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Requires Plugins: buddyforms, advanced-custom-fields
@@ -58,7 +58,7 @@ class BuddyFormsACF {
 	/**
 	 * @var string
 	 */
-	public static $version = '1.3.20';
+	public static $version = '1.3.21-beta.1';
 
 	/**
 	 * Initiate the class
