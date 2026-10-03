@@ -145,6 +145,7 @@ class BuddyFormsACF {
 		global $post;
 		if ( isset( $post ) && $post->post_type == 'buddyforms' && isset( $_GET['action'] ) && $_GET['action'] == 'edit' || isset( $post ) && $post->post_type == 'buddyforms' && $hook_suffix == 'post-new.php' || $hook_suffix == 'buddyforms_page_bf_add_ons' || $hook_suffix == 'buddyforms_page_bf_settings' ) {
 			wp_enqueue_script( 'buddyforms-acf-form-builder-js', plugins_url( 'assets/admin/js/form-builder.js', __FILE__ ), array( 'jquery' ) );
+			wp_localize_script( 'buddyforms-acf-form-builder-js', 'buddyformsAcfFormBuilder', array( 'nonce' => wp_create_nonce( 'buddyforms_acf_get_fields' ) ) );
 		}
 	}
 

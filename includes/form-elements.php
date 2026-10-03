@@ -604,6 +604,11 @@ add_action( 'buddyforms_update_post_meta', 'buddyforms_acf_update_post_meta', 10
  * Get ACF fields.
  */
 function buddyforms_acf_get_fields() {
+	check_ajax_referer( 'buddyforms_acf_get_fields', 'nonce' );
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_send_json_error( null, 403 );
+	}
+
 	// load fields.
 	$fields = array();
 	if ( post_type_exists( 'acf-field-group' ) ) {
