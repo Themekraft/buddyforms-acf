@@ -608,10 +608,10 @@ function buddyforms_acf_get_fields() {
 	$fields = array();
 	if ( post_type_exists( 'acf-field-group' ) ) {
 		if ( ! empty( $_POST['fields_group_id'] ) ) {
-			$fields = acf_get_fields( sanitize_text_input( wp_unslash( $_POST['fields_group_id'] ) ) );
+			$fields = acf_get_fields( absint( wp_unslash( $_POST['fields_group_id'] ) ) );
 		}
 	} elseif ( ! empty( $_POST['fields_group_id'] ) ) {
-		$fields = apply_filters( 'acf/field_group/get_fields', array(), sanitize_text_input( wp_unslash( $_POST['fields_group_id'] ) ) );
+		$fields = apply_filters( 'acf/field_group/get_fields', array(), absint( wp_unslash( $_POST['fields_group_id'] ) ) );
 	}
 
 	$field_select = array();
