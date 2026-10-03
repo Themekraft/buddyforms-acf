@@ -604,14 +604,19 @@ add_action( 'buddyforms_update_post_meta', 'buddyforms_acf_update_post_meta', 10
  * Get ACF fields.
  */
 function buddyforms_acf_get_fields() {
+	check_ajax_referer( 'buddyforms_acf_get_fields', 'nonce' );
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_send_json_error( null, 403 );
+	}
+
 	// load fields.
 	$fields = array();
 	if ( post_type_exists( 'acf-field-group' ) ) {
 		if ( ! empty( $_POST['fields_group_id'] ) ) {
-			$fields = acf_get_fields( sanitize_text_input( wp_unslash( $_POST['fields_group_id'] ) ) );
+			$fields = acf_get_fields( absint( wp_unslash( $_POST['fields_group_id'] ) ) );
 		}
 	} elseif ( ! empty( $_POST['fields_group_id'] ) ) {
-		$fields = apply_filters( 'acf/field_group/get_fields', array(), sanitize_text_input( wp_unslash( $_POST['fields_group_id'] ) ) );
+		$fields = apply_filters( 'acf/field_group/get_fields', array(), absint( wp_unslash( $_POST['fields_group_id'] ) ) );
 	}
 
 	$field_select = array();
@@ -650,9 +655,9 @@ function buddyforms_acf_process_submission_end( $args ) {
 						if ( $field['type'] == 'acf-group' || 'acf-field' === $field['type'] ) {
 							if ( 'acf-field' === $field['type'] ) {
 								if ( post_type_exists( 'acf-field-group' ) ) {
-									$field_value = isset( $_POST['acf'][ $field['acf_field'] ] ) ? sanitize_text_input( wp_unslash( $_POST['acf'][ $field['acf_field'] ] ) ) : '';
+									$field_value = isset( $_POST['acf'][ $field['acf_field'] ] ) ? sanitize_text_field( wp_unslash( $_POST['acf'][ $field['acf_field'] ] ) ) : '';
 								} else {
-									$field_value = isset( $_POST['fields'][ $field['acf_field'] ] ) ? sanitize_text_input( wp_unslash( $_POST['fields'][ $field['acf_field'] ] ) ) : '';
+									$field_value = isset( $_POST['fields'][ $field['acf_field'] ] ) ? sanitize_text_field( wp_unslash( $_POST['fields'][ $field['acf_field'] ] ) ) : '';
 								}
 								if ( isset( $field_value ) ) {
 									xprofile_set_field_data( $field['mapped_xprofile_field'], $user_id, $field_value );
@@ -667,7 +672,7 @@ function buddyforms_acf_process_submission_end( $args ) {
 									if ( $fields ) {
 										foreach ( $fields as $acf_field ) {
 											if ( isset( $_POST['acf'][ $acf_field['key'] ] ) ) {
-												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_input( wp_unslash( $_POST['acf'][ $acf_field['key'] ] ) ) );
+												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_field( wp_unslash( $_POST['acf'][ $acf_field['key'] ] ) ) );
 											}
 										}
 									}
@@ -676,7 +681,7 @@ function buddyforms_acf_process_submission_end( $args ) {
 									if ( $fields ) {
 										foreach ( $fields as $acf_field ) {
 											if ( isset( $_POST[ $acf_field['name'] ] ) ) {
-												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_input( wp_unslash( $_POST[ $acf_field['name'] ] ) ) );
+												xprofile_set_field_data( $acf_field['mapped_xprofile_field'], $user_id, sanitize_text_field( wp_unslash( $_POST[ $acf_field['name'] ] ) ) );
 											}
 										}
 									}
