@@ -4,7 +4,7 @@ jQuery(document).ready(function(jQuery) {
         jQuery.ajax({
             type: 'POST',
             url: ajaxurl,
-            data: {"action": "buddyforms_acf_get_fields", "fields_group_id": this.value },
+            data: {"action": "buddyforms_acf_get_fields", "fields_group_id": this.value, "nonce": buddyformsAcfFormBuilder.nonce },
             success: function(data){
                 var data = jQuery.parseJSON(data);
                 jQuery( '.bf_acf_' + field_id ).closest('select').empty()

@@ -1,100 +1,124 @@
-=== BuddyForms ACF ===
-Contributors: svenl77, konradS, themekraft, buddyforms, gfirem
-Tags: acf, advanced custom fields, buddypress, user, members, profiles, custom post types, taxonomy, frontend posting, frontend editing, moderation, revision
-Requires at least: 4.0
-Tested up to: 5.3.2
-Stable tag: 1.3.4
+=== BuddyForms Advanced Custom Fields
+Contributors: svenl77, konradS, themekraft, buddyforms, gfirem, camiloluna
+Tags: forms, frontend, custom fields, submission, buddypress
+Requires at least: 5.9
+Tested up to: 7.1
+Requires PHP: 7.4
+Stable tag: 1.3.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Integrates the popular Plugin "Advanced Custom Fields" (ACF) with BuddyForms. Use all ACF Fields in your form like native BuddyForms form elements.
+Add BuddyForms frontend forms that map to field groups created with the Advanced Custom Fields plugin. Independent integration; ACF is not included.
 
 == Description ==
 
-With the BuddyForms ACF Extension you can use Advanced Custom Fields with BuddyForms.
-<br>
+This add-on lets you render ACF field groups inside BuddyForms so users can create and edit content from the frontend—while keeping ACF-powered meta in sync.
 
-<h4>ACF Free and Pro</h4>
-This plugins supports the Free and Pro version of ACF out of the box.
-The plugin will detect if Free or Pro version is installed, and then loads the correct ACF field groups.
-<br>
+**Highlights**
+- Works with ACF Free and PRO (ACF must be installed separately).
+- Map ACF field groups to BuddyForms forms for frontend create/edit.
+- Supports common ACF field types (text, textarea, select, checkbox, date, color, maps, etc.).
+- BuddyForms Moderation support for review/approval workflows.
+- BuddyPress integration: sync selected ACF fields with xProfile.
 
-<h4>ACF for the backend and BuddyForms for the front end.</h4>
-
-ACF is the preferred choice for creating post metaboxes for the edit screen in the WordPress backend (wp-admin).
-
-It comes packed with tons of great form elements and features.
-
-<b>Use all of the ACF features in the front end and combine the best of both worlds. </b>
-
-BuddyForms ACF works with all ACF Extensions and BuddyForms Extensions.
-<br>
-
-<h4>Use ACF to create a BuddyPress Component </h4>
-Create a BuddyPress Members Component or extend your groups with ACF fields!
-<br>
-
-<h4>Use ACF for all your form fields</h4>
-With ACF enabled you build your form fields once and use everywhere. Use ACF for all form elements needed and just integrate the ACF field groups or single fields in your BuddyForms forms. You can use any ACF Field or Custom ACF Fields with BuddyForms and combine them with BuddyForms Fields and Extensions.
-<br>
-
-<h4>Moderation for your ACF Forms</h4>
-With BuddyForms Moderation you get real post submission moderation to your hands.
-Let your users create and edit posts without creating the ugly 404 "WordPress is struggling" if a published post is set back to draft. ;)
-<br>
-
-<h4>Sync ACF with BuddyPress</h4>
-Now you are able to Sync your ACF field under BuddyForms with BuddyPress xProfile.
-<br>
-
-<H4>Use everywhere</h4>
-With BuddyForms and ACF together you build your field sets once and use them everywhere.
-In the backend edit screen or in the front end via shortcodes or integrated with BuddyPress or any other BuddyForms supported plugin.
-
-See the list of BuddyForms Extension:
-<a href="https://buddyforms.com/extensions-for-wordpress-forms/">BuddyForms Extensions</a>
-
-See a list of ACF Extensions:
-<a href="https://wordpress.org/plugins/search.php?type=term&q=Advanced+Custom+Fields">https://wordpress.org/plugins/search.php?type=term&q=Advanced+Custom+Fields</a>
-<a href="https://wordpress.org/plugins/search.php?type=term&q=ACF">https://wordpress.org/plugins/search.php?type=term&q=ACF</a>
-
-Combine the power and get the most out of your post forms in the front and backend, seamlessly.
-<br>
-
-<a href="http://buddyforms.com" target="_new">Get BuddyForms Here</a>
-
-
-== Documentation & Support ==
-
-<h4>Extensive Documentation and Support</h4>
-
-All code is neat, clean and well documented (inline as well as in the documentation).
-
-The BuddyForms Documentation comes with many how-to’s!
-
-If you still get stuck somewhere, our support gets you back on the right track.
-You can find all help buttons in your BuddyForms Settings Panel in your WP Dashboard!
+> Note: This plugin integrates with Advanced Custom Fields; it does not bundle any ACF code or assets.
 
 == Installation ==
 
-You can download and install the plugin using the built-in WordPress plugin installer.
-
-If you download BuddyForms manually, make sure it is uploaded to "/wp-content/plugins/".
-
-Activate the plugin in the "Plugins" admin panel using the "Activate" link. If you're using WordPress Multisite, you can also activate BuddyForms network wide.
+1. Install and activate **BuddyForms**.
+2. Install and activate **Advanced Custom Fields** (Free or PRO).
+3. Upload and activate this add-on.
+4. Go to **BuddyForms → Forms**, create or edit a form, and map your ACF field groups or fields.
 
 == Frequently Asked Questions ==
 
-You need the BuddyForms plugin installed for the plugin to work.
-<a href="http://buddyforms.com" target="_blank">Get BuddyForms now!</a>
+= Does this plugin include ACF? =
+No. ACF needs to be installed and active.
+
+= Do I need ACF PRO? =
+No. The free version works; PRO field types are supported where possible.
+
+= Does this modify my ACF field groups? =
+No. Field groups are read to render frontend fields; they aren't altered.
 
 == Screenshots ==
-
-1. ** ACF Field Group ** -  Use ACF Groups in Forms
-
-2. ** ACF Single Field ** - Use Single fields in Groups
+1. Mapping an ACF field group to a BuddyForms form
+2. Frontend submission form
+3. Submitted entry view
 
 == Changelog ==
+= 1.3.21 - 03 Oct 2026 =
+* Required plugins are now declared with the WordPress "Requires Plugins" header instead of the bundled TGM Plugin Activation library.
+* Fixed a fatal error when loading the ACF field list in the form builder and when mapping ACF fields to BuddyPress profile fields on submit.
+* The ACF field list request in the form builder now checks a security nonce and user permissions.
+* Requires WordPress 5.9 and PHP 7.4. Tested up to WordPress 7.1.
+
+= 1.3.20 - 11 Feb 2026 =
+* Add is_org_compliant flag to Freemius config for WordPress.org compliance.
+
+= 1.3.19 - 10 Feb 2026 =
+* Fix text domain mismatch: changed from 'buddyforms' to 'buddyforms-acf' to match plugin slug.
+* Tested up to WordPress 6.9.
+
+= 1.3.18 - 9 Dec 2025 =
+* Fix missing text domains.
+* Add sanitization, escaping, and WP coding standards to form elements.
+* Update Freemius logic.
+* Tested up to WordPress 6.9.
+
+= 1.3.17 - 24 Sep 2025 =
+* Updated plugin display name for compliance.
+* Cleaned up readme file.
+* Added trademark disclaimer and clarified independent integration.
+* Replaced third-party brand assets references with neutral wording.
+* Updated tk_scripts depencency version.
+* Added dependency config to allow plugins.
+* Tested up to WordPress 6.8.2
+
+= 1.3.16 - 06 Feb 2024 =
+* Fixed issue with JS dependencies of ACF pro fields.
+* Updated Freemius SDK
+* Tested up to WordPress 6.4.3
+
+= 1.3.15 - 19 Nov 2023 =
+* Updated Freemius SDK
+* Tested up to WordPress 6.4.1
+
+= 1.3.14 - 18 May 2023 =
+* Tested up to WordPress 6.2.1
+
+= 1.3.13 - 06 Nov 2022 =
+* Updated download link in TGM class.
+* Tested up to WordPress 6.1
+
+= 1.3.12 - 08 Sep 2022 =
+* Fixed issue with multiple ACF fields used in the same form.
+* Tested up to WordPress 6.0.2
+
+= 1.3.11 - 22 Aug 2022 =
+* Fixed issue with fields value update.
+
+= 1.3.10 - 17 Aug 2022 =
+* Fixed issue with group field elements.
+
+= 1.3.9 - 16 Aug 2022 =
+* Fixed security issue.
+* Improved Freemius integration.
+* Tested up to WordPress 6.0.1
+
+= 1.3.8 - 17 May 2022 =
+* Updated readme.txt
+
+= 1.3.7 - 04 Mar 2022 =
+* Fixed issue with ACF .js file path.
+* Tested up to WordPress 5.9
+
+= 1.3.6 - 27 Sep 2021 =
+* Tested up with WordPress 5.8
+
+= 1.3.5 - 8 March 2021 =
+* Tested up with WordPress 5.7
+
 = 1.3.4 - 6 April 2020 =
 * Fixed the label for single and groups ACF fields. Thanks to Patty O'Hara
 
