@@ -4,7 +4,7 @@ Tags: forms, frontend, custom fields, submission, buddypress
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.21-beta.1
+Stable tag: 1.3.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,12 @@ No. Field groups are read to render frontend fields; they aren't altered.
 3. Submitted entry view
 
 == Changelog ==
+= 1.3.21 - 03 Oct 2026 =
+* Required plugins are now declared with the WordPress "Requires Plugins" header instead of the bundled TGM Plugin Activation library.
+* Fixed a fatal error when loading the ACF field list in the form builder and when mapping ACF fields to BuddyPress profile fields on submit.
+* The ACF field list request in the form builder now checks a security nonce and user permissions.
+* Requires WordPress 5.9 and PHP 7.4. Tested up to WordPress 7.1.
+
 = 1.3.20 - 11 Feb 2026 =
 * Add is_org_compliant flag to Freemius config for WordPress.org compliance.
 
