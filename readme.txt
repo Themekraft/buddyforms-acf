@@ -1,4 +1,4 @@
-=== BuddyForms Advanced Custom Fields
+=== BuddyForms Advanced Custom Fields ===
 Contributors: svenl77, konradS, themekraft, buddyforms, gfirem, camiloluna
 Tags: forms, frontend, custom fields, submission, buddypress
 Requires at least: 5.9
