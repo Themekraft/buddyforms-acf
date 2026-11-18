@@ -197,7 +197,7 @@ function buddyforms_acf_enqueue_form_script() {
 
 	wp_enqueue_script(
 		'buddyforms-acf-js',
-		BUDDYFORMS_ACF_PLUGIN_URL . '/assets/js/buddyforms-acf.js',
+		BUDDYFORMS_ACF_PLUGIN_URL . 'assets/js/buddyforms-acf.js',
 		array(
 			'jquery',
 			'acf-input',
