@@ -176,21 +176,36 @@ add_action( 'acf/input/admin_enqueue_scripts', 'buddyforms_acf_form_builder_form
 
 /**
  * Enqueue scripts for ACF form builder.
+ *
+ * ACF fires this hook on every front-end page, but buddyforms-js only exists on pages that
+ * render a BuddyForms form (usually later, from the content), and not at all when BuddyForms
+ * is inactive. Wait until the footer scripts print to know whether the page has a form.
  */
 function buddyforms_acf_form_builder_form_elements_enqueue_scripts() {
 	if ( ! is_admin() ) {
-		wp_enqueue_script(
-			'buddyforms-acf-js',
-			BUDDYFORMS_ACF_PLUGIN_URL . '/assets/js/buddyforms-acf.js',
-			array(
-				'jquery',
-				'acf-input',
-				'buddyforms-js',
-			),
-			BuddyFormsACF::getVersion(),
-			true
-		);
+		add_action( 'wp_print_footer_scripts', 'buddyforms_acf_enqueue_form_script', 1 );
 	}
+}
+
+/**
+ * Enqueue the front-end script when the page renders a BuddyForms form.
+ */
+function buddyforms_acf_enqueue_form_script() {
+	if ( ! wp_script_is( 'buddyforms-js', 'registered' ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'buddyforms-acf-js',
+		BUDDYFORMS_ACF_PLUGIN_URL . '/assets/js/buddyforms-acf.js',
+		array(
+			'jquery',
+			'acf-input',
+			'buddyforms-js',
+		),
+		BuddyFormsACF::getVersion(),
+		true
+	);
 }
 add_filter( 'buddyforms_form_element_add_field', 'buddyforms_acf_form_builder_form_elements', 1, 5 );
 
