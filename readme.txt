@@ -1,10 +1,10 @@
-=== BuddyForms Advanced Custom Fields
+=== BuddyForms Advanced Custom Fields ===
 Contributors: svenl77, konradS, themekraft, buddyforms, gfirem, camiloluna
 Tags: forms, frontend, custom fields, submission, buddypress
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.21
+Stable tag: 1.3.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,10 @@ No. Field groups are read to render frontend fields; they aren't altered.
 3. Submitted entry view
 
 == Changelog ==
+= 1.3.22 - 18 Nov 2026 =
+* Fixed a notice about a script with unregistered dependencies on every front-end page: the add-on script now only loads on pages with a BuddyForms form.
+* Removed unused code that tried to load the Freemius SDK from an old BuddyForms location.
+
 = 1.3.21 - 03 Oct 2026 =
 * Required plugins are now declared with the WordPress "Requires Plugins" header instead of the bundled TGM Plugin Activation library.
 * Fixed a fatal error when loading the ACF field list in the form builder and when mapping ACF fields to BuddyPress profile fields on submit.

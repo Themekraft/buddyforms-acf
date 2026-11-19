@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin Name: BuddyForms Advanced Custom Fields
  * Plugin URI: http://buddyforms.com/downloads/buddyforms-advanced-custom-fields/
  * Description: Integrates the populare ACF Plugin with BuddyForms. Use all ACF Fields in your form like native BuddyForms Form Elements
- * Version: 1.3.21
+ * Version: 1.3.22
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Requires Plugins: buddyforms, advanced-custom-fields
@@ -58,7 +58,7 @@ class BuddyFormsACF {
 	/**
 	 * @var string
 	 */
-	public static $version = '1.3.21';
+	public static $version = '1.3.22';
 
 	/**
 	 * Initiate the class
@@ -209,13 +209,9 @@ function buddyforms_acf_fs() {
 	global $buddyforms_acf_fs;
 
 	if ( ! isset( $buddyforms_acf_fs ) ) {
-		// Include Freemius SDK.
-		if ( file_exists( dirname( dirname( __FILE__ ) ) . '/buddyforms/includes/resources/freemius/start.php' ) ) {
-			// Try to load SDK from parent plugin folder.
-			require_once dirname( dirname( __FILE__ ) ) . '/buddyforms/includes/resources/freemius/start.php';
-		} elseif ( file_exists( dirname( dirname( __FILE__ ) ) . '/buddyforms-premium/includes/resources/freemius/start.php' ) ) {
-			// Try to load SDK from premium parent plugin folder.
-			require_once dirname( dirname( __FILE__ ) ) . '/buddyforms-premium/includes/resources/freemius/start.php';
+		// The Freemius SDK comes with BuddyForms, which loads it before this add-on initializes.
+		if ( ! function_exists( 'fs_dynamic_init' ) ) {
+			return false;
 		}
 
 		$buddyforms_acf_fs = fs_dynamic_init(
