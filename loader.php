@@ -143,8 +143,9 @@ class BuddyFormsACF {
 	 */
 	function buddyforms_acf_admin_js( $hook_suffix ) {
 		global $post;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only screen check before enqueueing a script.
 		if ( isset( $post ) && $post->post_type == 'buddyforms' && isset( $_GET['action'] ) && $_GET['action'] == 'edit' || isset( $post ) && $post->post_type == 'buddyforms' && $hook_suffix == 'post-new.php' || $hook_suffix == 'buddyforms_page_bf_add_ons' || $hook_suffix == 'buddyforms_page_bf_settings' ) {
-			wp_enqueue_script( 'buddyforms-acf-form-builder-js', plugins_url( 'assets/admin/js/form-builder.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'buddyforms-acf-form-builder-js', plugins_url( 'assets/admin/js/form-builder.js', __FILE__ ), array( 'jquery' ), self::$version, false );
 			wp_localize_script( 'buddyforms-acf-form-builder-js', 'buddyformsAcfFormBuilder', array( 'nonce' => wp_create_nonce( 'buddyforms_acf_get_fields' ) ) );
 		}
 	}
@@ -193,7 +194,7 @@ class BuddyFormsACF {
 				if ( function_exists( 'acf_get_url' ) && function_exists( 'acf_is_pro' ) && acf_is_pro() ) {
 					$version = acf_get_setting( 'version' );
 					$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-					wp_enqueue_script( 'acf-pro-field-group', acf_get_url( "/assets/build/js/acf-field-group{$min}.js" ), array( 'acf-field-group' ), $version );
+					wp_enqueue_script( 'acf-pro-field-group', acf_get_url( "/assets/build/js/acf-field-group{$min}.js" ), array( 'acf-field-group' ), $version, false );
 				}
 			}
 		}
