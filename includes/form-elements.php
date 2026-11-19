@@ -94,6 +94,7 @@ function buddyforms_acf_form_builder_form_elements( $form_fields, $form_slug, $f
 					$fields = acf_get_fields( $acf_group );
 				}
 			} else {
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
 				$fields = apply_filters( 'acf/field_group/get_fields', array(), $acf_group );
 			}
 
@@ -319,6 +320,7 @@ function buddyforms_acf_frontend_form_elements( $form, $form_args ) {
 				if ( post_type_exists( 'acf-field-group' ) ) {
 					create_field( $field );
 				} else {
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
 					do_action( 'acf/create_field', $field, $post_id );
 				}
 				$acf_form_field = ob_get_clean();
@@ -417,10 +419,11 @@ function buddyforms_acf_frontend_form_elements( $form, $form_args ) {
 			case 'acf-group':
 				// load fields.
 				if ( post_type_exists( 'acf-field-group' ) ) {
-					$parent = (int) $customfield['acf_group'];
+					$parent = isset( $customfield['acf_group'] ) ? (int) $customfield['acf_group'] : 0;
 					$fields = acf_get_fields( $parent );
 				} else {
-					$fields = apply_filters( 'acf/field_group/get_fields', array(), $customfield['acf_group'] );
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
+					$fields = apply_filters( 'acf/field_group/get_fields', array(), isset( $customfield['acf_group'] ) ? $customfield['acf_group'] : null );
 				}
 				if ( ! isset( $fields ) || ! is_array( $fields ) ) {
 					return $form;
@@ -450,6 +453,7 @@ function buddyforms_acf_frontend_form_elements( $form, $form_args ) {
 					if ( post_type_exists( 'acf-field-group' ) ) {
 						create_field( $field );
 					} else {
+						// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
 						do_action( 'acf/create_field', $field, $post_id );
 					}
 					$acf_form_field = ob_get_clean();
@@ -558,6 +562,7 @@ add_filter( 'buddyforms_forms_classes', 'buddyforms_acf_form_classes', 10, 3 );
  * @param int|str $post_id Current post ID.
  */
 function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- runs on buddyforms_update_post_meta, fired only after BuddyForms verified the nonce (buddyforms_process_submission() in includes/form/form-control.php, buddyforms_metabox_admin_form_metabox_save() in includes/admin/form-metabox.php).
 	if ( 'acf-group' === $customfield['type'] || 'acf-field' === $customfield['type'] ) {
 
 		global $buddyforms, $form_slug;
@@ -573,7 +578,7 @@ function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
 
 		if ( 'acf-group' === $customfield['type'] ) {
 
-			$group_id = $customfield['acf_group'];
+			$group_id = isset( $customfield['acf_group'] ) ? $customfield['acf_group'] : null;
 
 			$fields = array();
 
@@ -589,6 +594,7 @@ function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
 					}
 				}
 			} else {
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
 				$fields = apply_filters( 'acf/field_group/get_fields', $fields, $group_id );
 				if ( $fields ) {
 					foreach ( $fields as $field ) {
@@ -600,7 +606,7 @@ function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
 			}
 		}
 
-		if ( 'acf-field' === $customfield['type'] ) {
+		if ( 'acf-field' === $customfield['type'] && isset( $customfield['acf_field'] ) ) {
 			if ( post_type_exists( 'acf-field-group' ) ) {
 				if ( isset( $_POST['acf'][ $customfield['acf_field'] ] ) ) {
 					update_field( $customfield['acf_field'], sanitize_text_field( wp_unslash( $_POST['acf'][ $customfield['acf_field'] ] ) ), $post_id );
@@ -612,6 +618,7 @@ function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
 			}
 		}
 	}
+	// phpcs:enable WordPress.Security.NonceVerification.Missing
 }
 add_action( 'buddyforms_update_post_meta', 'buddyforms_acf_update_post_meta', 10, 2 );
 
@@ -631,6 +638,7 @@ function buddyforms_acf_get_fields() {
 			$fields = acf_get_fields( absint( wp_unslash( $_POST['fields_group_id'] ) ) );
 		}
 	} elseif ( ! empty( $_POST['fields_group_id'] ) ) {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
 		$fields = apply_filters( 'acf/field_group/get_fields', array(), absint( wp_unslash( $_POST['fields_group_id'] ) ) );
 	}
 
@@ -653,6 +661,7 @@ add_action( 'wp_ajax_buddyforms_acf_get_fields', 'buddyforms_acf_get_fields' );
  * @param array $args Arguments.
  */
 function buddyforms_acf_process_submission_end( $args ) {
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- runs on buddyforms_process_submission_end, fired only after buddyforms_process_submission() verified the form nonce (includes/form/form-control.php).
 	extract( $args );
 
 	if ( ! isset( $user_id ) ) {
@@ -692,6 +701,7 @@ function buddyforms_acf_process_submission_end( $args ) {
 										}
 									}
 								} else {
+									// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
 									$fields = apply_filters( 'acf/field_group/get_fields', $fields, $group_id );
 									if ( $fields ) {
 										foreach ( $fields as $acf_field ) {
@@ -708,5 +718,6 @@ function buddyforms_acf_process_submission_end( $args ) {
 			}
 		}
 	}
+	// phpcs:enable WordPress.Security.NonceVerification.Missing
 }
 add_action( 'buddyforms_process_submission_end', 'buddyforms_acf_process_submission_end', 99, 1 );
