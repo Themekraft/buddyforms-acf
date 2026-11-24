@@ -14,14 +14,22 @@ Add BuddyForms frontend forms that map to field groups created with the Advanced
 
 This add-on lets you render ACF field groups inside BuddyForms so users can create and edit content from the frontend—while keeping ACF-powered meta in sync.
 
-**Highlights**
-- Works with ACF Free and PRO (ACF must be installed separately).
-- Map ACF field groups to BuddyForms forms for frontend create/edit.
-- Supports common ACF field types (text, textarea, select, checkbox, date, color, maps, etc.).
-- BuddyForms Moderation support for review/approval workflows.
-- BuddyPress integration: sync selected ACF fields with xProfile.
+= Highlights =
+
+* Works with ACF Free and PRO (ACF must be installed separately)
+* Add single ACF fields or whole ACF field groups to BuddyForms forms, for front-end create and edit
+* Supports common single-value ACF field types such as text, number, email and select
+* ACF validation, conditional logic and front-end pickers such as date and color
+* Values are saved as normal ACF data
+* Works with contact, registration and post forms
+* Works with the free version of BuddyForms for Posts and Pages. Custom post types need BuddyForms Pro
+* BuddyPress integration: sync selected ACF fields with xProfile
 
 > Note: This plugin integrates with Advanced Custom Fields; it does not bundle any ACF code or assets.
+
+= Documentation =
+
+Guides for BuddyForms and its add-ons, including how to sync ACF fields with BuddyPress profiles, are at [docs.buddyforms.com](https://docs.buddyforms.com/).
 
 == Installation ==
 
@@ -33,13 +41,20 @@ This add-on lets you render ACF field groups inside BuddyForms so users can crea
 == Frequently Asked Questions ==
 
 = Does this plugin include ACF? =
+
 No. ACF needs to be installed and active.
 
 = Do I need ACF PRO? =
+
 No. The free version works; PRO field types are supported where possible.
 
 = Does this modify my ACF field groups? =
+
 No. Field groups are read to render frontend fields; they aren't altered.
+
+= Do I need BuddyForms Pro? =
+
+For forms that create Posts or Pages, the free version of BuddyForms is enough. To use ACF fields on a custom post type, you need BuddyForms Pro, because the free version can only create Posts and Pages.
 
 == Screenshots ==
 1. Mapping an ACF field group to a BuddyForms form
