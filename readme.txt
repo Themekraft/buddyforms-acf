@@ -27,6 +27,10 @@ This add-on lets you render ACF field groups inside BuddyForms so users can crea
 
 > Note: This plugin integrates with Advanced Custom Fields; it does not bundle any ACF code or assets.
 
+= Documentation =
+
+Guides for BuddyForms and its add-ons, including how to sync ACF fields with BuddyPress profiles, are at [docs.buddyforms.com](https://docs.buddyforms.com/).
+
 == Installation ==
 
 1. Install and activate **BuddyForms**.
