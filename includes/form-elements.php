@@ -417,10 +417,10 @@ function buddyforms_acf_frontend_form_elements( $form, $form_args ) {
 			case 'acf-group':
 				// load fields.
 				if ( post_type_exists( 'acf-field-group' ) ) {
-					$parent = (int) $customfield['acf_group'];
+					$parent = isset( $customfield['acf_group'] ) ? (int) $customfield['acf_group'] : 0;
 					$fields = acf_get_fields( $parent );
 				} else {
-					$fields = apply_filters( 'acf/field_group/get_fields', array(), $customfield['acf_group'] );
+					$fields = apply_filters( 'acf/field_group/get_fields', array(), isset( $customfield['acf_group'] ) ? $customfield['acf_group'] : null );
 				}
 				if ( ! isset( $fields ) || ! is_array( $fields ) ) {
 					return $form;
@@ -573,7 +573,7 @@ function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
 
 		if ( 'acf-group' === $customfield['type'] ) {
 
-			$group_id = $customfield['acf_group'];
+			$group_id = isset( $customfield['acf_group'] ) ? $customfield['acf_group'] : null;
 
 			$fields = array();
 
@@ -600,7 +600,7 @@ function buddyforms_acf_update_post_meta( $customfield, $post_id ) {
 			}
 		}
 
-		if ( 'acf-field' === $customfield['type'] ) {
+		if ( 'acf-field' === $customfield['type'] && isset( $customfield['acf_field'] ) ) {
 			if ( post_type_exists( 'acf-field-group' ) ) {
 				if ( isset( $_POST['acf'][ $customfield['acf_field'] ] ) ) {
 					update_field( $customfield['acf_field'], sanitize_text_field( wp_unslash( $_POST['acf'][ $customfield['acf_field'] ] ) ), $post_id );
